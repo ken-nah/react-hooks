@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import uuid from "uuidv4";
+
+const TASK_ITEM_STORAGE = "TASK_ITEM_STORAGE";
+
+const storeTasks = taskMap => {
+  localStorage.setItem(TASK_ITEM_STORAGE, JSON.stringify(taskMap));
+};
+
+const readStoredTasks = () => {
+  const storedTasks = JSON.parse(localStorage.getItem(TASK_ITEM_STORAGE));
+  return storedTasks ? storedTasks : { tasks: [], completedTasks: [] };
+};
 
 function Task() {
   const [taskText, setTaskText] = useState("");
-  const [tasks, setTasks] = useState([]);
-  const [completedTasks, setCompletedTasks] = useState([]);
+  const storedTasks = readStoredTasks();
+  const [tasks, setTasks] = useState(storedTasks.tasks);
+  const [completedTasks, setCompletedTasks] = useState(
+    storedTasks.completedTasks
+  );
+
+  useEffect(() => {
+    storeTasks({ tasks, completedTasks });
+  });
 
   const updateText = event => {
     setTaskText(event.target.value);
@@ -28,6 +46,7 @@ function Task() {
 
   return (
     <div>
+        <h1>Tasks</h1>
       <div className="form">
         <input type="text" onChange={updateText} />
         <button onClick={addTask}>Add Task</button>
