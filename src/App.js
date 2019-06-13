@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-import Joke from './Joke'
-import Stories from './Stories'
+import Joke from "./Joke";
+import Stories from "./Stories";
+import Tasks from "./Task";
 
 function App() {
   const [userQuery, setUserQuery] = useState("");
@@ -11,10 +12,7 @@ function App() {
   };
 
   const searchQuery = () => {
-    window.open(
-      `https://google.com/search?query=${userQuery}`,
-      "_blank"
-    );
+    window.open(`https://google.com/search?query=${userQuery}`, "_blank");
   };
 
   const handleKeyPress = event => {
@@ -32,8 +30,11 @@ function App() {
         />
         <button onClick={searchQuery}>Search</button>
       </div>
-      <hr/>
+      <hr />
       <Joke />
+      <hr />
+      <Tasks />
+      <hr />
       <Stories />
     </div>
   );
