@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MATRIX_PICTURES from "./data/matrix";
 
-const MIN_DELAY = 500;
+const MIN_DELAY = 10;
 const MIN_INCREMENT = 1;
 
 function Matrix() {
